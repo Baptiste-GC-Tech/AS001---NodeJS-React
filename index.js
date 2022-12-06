@@ -2,6 +2,7 @@ const express = require("express")
 const bodyParser = require("body-parser")
 const jsonParser = bodyParser.json()
 const dbo = require("./db/db")
+const { ObjectId } = require("mongodb")
 const app = express()
 const port = 4444
 
@@ -28,7 +29,7 @@ app.get("/pokemon/list", function (req, res) {
         }
         res.json(result)
       })
-  })
+})
 
 app.post("/pokemon/insert", jsonParser, (req, res) => {
   const body = req.body
@@ -44,13 +45,20 @@ app.delete("/pokemon/delete", jsonParser, async (req, res) => {
   const db = dbo.getDb()
   const coll = db.collection("pokemon")
   const body = req.body
+  
+  if(body._id){
+    const query = { _id:ObjectId(body._id) }
+  }else if(body.name){
+    const query = { name:body.name }
+  }
 
-  const query = { name:body.name }
-
-  const result = await coll.deleteOne(query)
+  const result = await coll.deleteOne(query) 
   if(result.deletedCount == 1)
   {
-    res.send(`Succès !\n${query.name} supprimé`)
+    res.status(200).send(`Succès !\n${query.name} supprimé`)
   }
-  res.send("Raté... :'-(")
-}) 
+  else
+  {
+    res.status(500).send("Raté... :'-(")
+  }
+})
