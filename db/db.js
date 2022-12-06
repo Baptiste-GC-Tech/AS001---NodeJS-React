@@ -14,7 +14,7 @@ module.exports = {
         return err;
       }
       
-      dbConnection = db.db("pokedex");
+      dbConnection = db.db("pokemonDB");
       console.log("Successfully connected to MongoDB.");
     });
   },
