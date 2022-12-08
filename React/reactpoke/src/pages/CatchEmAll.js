@@ -1,3 +1,7 @@
-return <>
-    <h1>Ajouter des pokémons à votre pokédex</h1>
+function CatchEmAll(props){
+    return <>
+    <h1>Ajoutez des pokémons à votre pokédex</h1>
 </>
+}
+
+export default CatchEmAll
