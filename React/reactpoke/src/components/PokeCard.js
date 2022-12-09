@@ -1,4 +1,4 @@
-import 'PokeCard.css'
+import './PokeCard.css'
 
 function PokeCard(props){
     return <>

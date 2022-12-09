@@ -1,5 +1,5 @@
-import { useEffect } from 'react'
-import {getAll} from '../api/PokemonUtilities'
+import { useEffect, useState } from 'react'
+import { getAll } from '../api/PokemonUtilities'
 import PokeCard from '../components/PokeCard'
 
 function PokeList(props){
