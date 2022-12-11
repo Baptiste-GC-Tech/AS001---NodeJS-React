@@ -3,7 +3,9 @@ const bodyParser = require("body-parser")
 const jsonParser = bodyParser.json()
 const dbo = require("./db/db")
 const { ObjectId } = require("mongodb")
+const cors = require("cors")
 const app = express()
+app.use(cors())
 const port = 4444
 
 dbo.connectToServer()
@@ -43,6 +45,22 @@ app.post("/pokemon/insert", jsonParser, (req, res) => {
   res.json(body)
 })
 
+app.post('/pokemon/update', jsonParser, (req, res) => {
+  const option = { upsert: true };
+  const filter = {name:req.body.target};
+  const newData = {
+    $set:{
+      name: req.body.newName,
+    }
+  }
+  console.log('Got body:', newData);
+  
+  const db = dbo.getDb()
+  const coll = db.collection("pokemon")
+  coll.updateOne(filter,newData,option);
+  res.json(newData);
+});
+
 app.delete("/pokemon/delete", jsonParser, async (req, res) => {
   const db = dbo.getDb()
   const coll = db.collection("pokemon")
@@ -52,24 +70,7 @@ app.delete("/pokemon/delete", jsonParser, async (req, res) => {
     const query = { _id:ObjectId(body._id) }
   }else if(body.name){
     const query = { name:body.name }
-  }
-
-  app.post('/pokemon/update', jsonParser, (req, res) => {
-    const option = { upsert: true };
-    const filter = {name:req.body.target};
-    const newBatard = {
-      $set:{
-        name: req.body.newName,
-      }
-    }
-    console.log('Got body:', newBatard);
-    
-    const db = dbo.getDb()
-    const coll = db.collection("pokemon")
-    coll.updateOne(filter,newBatard,option);
-    res.json(newBatard);
-  });
-  
+  } 
 
   const result = await coll.deleteOne(query) 
   if(result.deletedCount == 1)
