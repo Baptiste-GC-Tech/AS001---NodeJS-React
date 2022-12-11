@@ -1,16 +1,15 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom" 
 
 function CatchEmAll(props){
-    return <nav>
-        <h1>Binvenue_sur_la_base_de_donnée_pokemons_!</h1>
-        <div className="">
-            <ul>
-                <li><Link to="/">Accueil</Link></li>
-                <li><Link to="/pokemons">Liste_des_pokemons</Link></li>
-                <li><Link to="/pokedit">Votre_pokedex</Link></li>
-            </ul>
-        </div>
-    </nav>
+    return <>
+    <h1>Ajouter des pokémons à votre pokédex</h1>
+    <p>bla bla</p>
+        <ul>
+            <li><Link to="/">CatchEmAll</Link></li>
+            <li><Link to="/pokemons">PokeList</Link></li>
+            <li><Link to="/pokedit">PokEdit</Link></li>
+        </ul>
+    </>
 }
 
 export default CatchEmAll

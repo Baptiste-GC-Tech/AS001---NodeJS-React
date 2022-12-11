@@ -2,23 +2,33 @@ import { useEffect, useState } from 'react'
 import { getAll } from '../api/PokemonUtilities'
 import PokeCard from '../components/PokeCard'
 
-function PokeList(props){
-    const [ pokemons, setPokemons ] = useState([]);
+import './PokeList.css'
 
-    useEffect(() => { 
+function CatchEmAll(props)
+{
+    const [ pokemons, setPokemons] = useState([])
+
+    useEffect(() => {
         const pokemonsFetched = getAll();
         pokemonsFetched
             .then(result => setPokemons(result))
-            .catch(error=>console.error("Erreur avec notre API :",error.message));
-    },[]);
+            .catch(error => console.error("Bruh something went wrong : ", error.message))
+    },[])
+
+    // console.log("printing {pokemons}...")
+    // console.log(pokemons)
+    // console.log("Done !")
+
+    let pokeCardRequired = []
+    pokemons.map((pokemon, key) => {
+        console.log(pokemon)
+        pokeCardRequired.push(<PokeCard pokemon = {pokemon}></PokeCard>)
+    })
 
     return <>
-      {
-        pokemons.map((pokemon,key) =>{
-          return <PokeCard pokemon={pokemon} />
-        })
-      }
-    </>
+        <h1>La liste des pokémons disponibles</h1>
+        {pokeCardRequired}
+    </>  
 }
 
-export default PokeList
+export default CatchEmAll
