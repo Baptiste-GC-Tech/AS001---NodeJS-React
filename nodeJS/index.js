@@ -58,6 +58,28 @@ app.post("/pokemon/insert", jsonParser, (req, res) => {
   res.json(body)
 })
 
+app.post("/pokedex/insert", jsonParser, (req, res) => {
+  const db = dbo.getDb()
+  const collPokedex = db.collection("pokedex")
+  const collPokemon = db.collection("pokemon")
+  const body = req.body
+
+  collPokemon.find({ name: body.name}).toArray(function (err, result) {
+    if (err)
+    {
+      res.status(400).send("brah jsp lis l'erreur")
+    }
+    else
+    {
+      collPokedex.insertOne(result)
+      console.log("le Result en json")
+      console.log(result)
+      console.log("voilà c'était bô ?")
+      res.json(result)
+    }
+  })
+})
+
 app.post('/pokemon/update', jsonParser, (req, res) => {
   const option = { upsert: true };
   const filter = {name:req.body.target};

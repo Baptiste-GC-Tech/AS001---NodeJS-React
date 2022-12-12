@@ -2,9 +2,7 @@ import { useEffect, useState } from 'react'
 import { getAll } from '../api/PokemonUtilities'
 import PokeCard from '../components/PokeCard'
 
-import './PokeList.css'
-
-function CatchEmAll(props)
+function PokeList(props)
 {
     const [ pokemons, setPokemons] = useState([])
 
@@ -30,4 +28,4 @@ function CatchEmAll(props)
     </>  
 }
 
-export default CatchEmAll
+export default PokeList

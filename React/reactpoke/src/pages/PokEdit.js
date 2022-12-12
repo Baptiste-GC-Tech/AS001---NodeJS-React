@@ -1,6 +1,6 @@
-function CatchEmAll(props){
+function PokEdit(props){
 return <>
     <h1>Modifier la liste des pokémons dispos</h1>
 </>}
 
-export default CatchEmAll
+export default PokEdit
