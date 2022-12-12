@@ -21,7 +21,6 @@ function CatchEmAll(props)
 
     let pokeCardRequired = []
     pokemons.map((pokemon, key) => {
-        console.log(pokemon)
         pokeCardRequired.push(<PokeCard pokemon = {pokemon}></PokeCard>)
     })
 

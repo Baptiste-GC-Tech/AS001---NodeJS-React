@@ -5,19 +5,18 @@ const dbo = require("./db/db")
 const { ObjectId } = require("mongodb")
 const cors = require("cors")
 const app = express()
-app.use(cors())
 const port = 4444
 
 dbo.connectToServer()
-
 app.use(bodyParser.urlencoded({ extended: true }))
-
-app.get("/", function (req, res) {
-  res.send("Hello World!")
-})
+app.use(cors())
 
 app.listen(port, function () {
   console.log(`App listening on port ${port}!`)
+})
+
+app.get("/", function (req, res) {
+  res.send("Hello World!")
 })
 
 app.get("/pokemon/list", function (req, res) {
@@ -29,6 +28,20 @@ app.get("/pokemon/list", function (req, res) {
     if (err)
     {
       res.status(400).send("Error fetching pokemons!")
+    }
+    res.json(result)
+  })
+})
+
+app.get("/pokedex/list", function (req, res) {
+  const db = dbo.getDb()
+  const coll = db.collection("pokedex")
+  const body = req.body
+
+  coll.find({}).toArray(function (err, result) {
+    if (err)
+    {
+      res.status(400).send("Error fetching pokedex!")
     }
     res.json(result)
   })

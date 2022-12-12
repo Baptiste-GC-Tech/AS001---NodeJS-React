@@ -4,23 +4,17 @@ import PokeList from "./pages/PokeList.js"
 import PokEdit from "./pages/PokEdit.js"
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes,
   Route
 } from "react-router-dom"
 
 function App() {
   return <Router>
-    <Switch>
-      <Route exact path="/">
-        <CatchEmAll />
-      </Route>
-      <Route path="/pokemons">
-        <PokeList />
-      </Route>
-      <Route path="/pokedit">
-        <PokEdit />
-      </Route>
-    </Switch>
+    <Routes>
+      <Route path='/' element={<CatchEmAll />}/>
+      <Route path='/pokemons' element={<PokeList />}/>
+      <Route path='/pokedit' element={<PokEdit />}/>
+    </Routes>
   </Router>
 }
 
