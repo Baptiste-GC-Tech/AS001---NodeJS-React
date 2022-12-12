@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { getAll } from '../api/PokemonUtilities'
 import PokeCard from '../components/PokeCard'
 
+import './PokeList.css'
+
 function PokeList(props)
 {
     const [ pokemons, setPokemons] = useState([])
@@ -17,14 +19,14 @@ function PokeList(props)
     // console.log(pokemons)
     // console.log("Done !")
 
-    let pokeCardRequired = []
+    let pokeCardList = []
     pokemons.map((pokemon, key) => {
-        pokeCardRequired.push(<PokeCard pokemon = {pokemon}></PokeCard>)
+        pokeCardList.push(<PokeCard pokemon = {pokemon}></PokeCard>)
     })
 
     return <>
         <h1>La liste des pokémons disponibles</h1>
-        {pokeCardRequired}
+        {pokeCardList}
     </>  
 }
 

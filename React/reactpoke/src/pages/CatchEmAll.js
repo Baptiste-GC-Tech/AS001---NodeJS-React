@@ -26,39 +26,11 @@ function CatchEmAll(props)
             .catch(error => console.error("Bruh something went wrong : ", error.message))
     },[])
 
-    // // Remplissage de la liste de composant à afficher (Entrée du pokedex)
-    // let knownPokemons = []
-    // pokedex.map( async (pokemon, key) => {
-    //     knownPokemons.push( <PokeCard pokemon = {pokemon}></PokeCard> )
-    // })
-
-    // // Remplissage de la liste de composant à afficher (Tous SAUF les entrées du pokedex)
-    // await 
-    // let unknownPokemons = []
-    // pokemons.map((pokemon, key) => {
-    //     if ()
-    //     unknownPokemons.push(<PokeCard pokemon = {pokemon}></PokeCard>)
-    // })
-
-
-    let knownPokemons = []
-    let unknownPokemons = []
-    pokemons.map((pokemon, key) => {
-        if(pokedex.indexOf(pokemon) > -1)
-        {
-            knownPokemons.push(<PokeCard pokemon = {pokemon}></PokeCard>)
-        }
-        else
-        {
-            unknownPokemons.push(<PokeCard pokemon = {pokemon}></PokeCard>)
-        }
+    // Remplissage de la liste de composant à afficher (Entrée du pokedex)
+    let pokeCradList = []
+    pokedex.map( async (pokemon, key) => {
+        pokeCradList.push( <PokeCard pokemon = {pokemon}></PokeCard> )
     })
-
-    // let arr = ['zero','one','two']
-    // console.log(arr.indexOf('one'))
-    // console.log(arr.indexOf('two'))
-    // console.log(arr.indexOf('three'))
-
 
     return <>
     <h1>Navigation</h1>
@@ -67,10 +39,7 @@ function CatchEmAll(props)
             <li><Link to="/pokedit">PokEdit</Link></li>
         </ul>
     <h2>Votre pokedex</h2>
-    {knownPokemons}
-    <br />
-    <h2>Pokemons inconnus</h2>
-    {unknownPokemons}
+    {pokeCradList}
     </>
 }
 
