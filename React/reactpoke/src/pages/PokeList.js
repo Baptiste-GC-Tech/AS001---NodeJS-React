@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getAll } from '../api/PokemonUtilities'
 import PokeCard from '../components/PokeCard'
+import NavBar from '../components/Nav'
 
 import './PokeList.css'
 
@@ -25,6 +26,7 @@ function PokeList(props)
     })
 
     return <>
+        <NavBar></NavBar>
         <h1>La liste des pokémons disponibles</h1>
         {pokeCardList}
     </>  

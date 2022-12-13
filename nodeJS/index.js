@@ -24,7 +24,6 @@ app.get("/", function (req, res) {
 app.get("/pokemon/list", function (req, res) {
   const db = dbo.getDb()
   const coll = db.collection("pokemon")
-  const body = req.body
 
   coll.find({}).toArray(function (err, result) {
     if (err)
@@ -66,17 +65,24 @@ app.delete("/pokemon/delete", jsonParser, async (req, res) => {
   const db = dbo.getDb()
   const coll = db.collection("pokemon")
   const body = req.body
+  let query = null
   
-  if(body._id){
-    const query = { _id:ObjectId(body._id) }
-  }else if(body.name){
-    const query = { name:body.name }
-  } 
+  if(!!body._id)
+  {
+    console.log("USING _id")
+    query = { _id:body._id }
+  }
+  else if(!!body.name)
+  {
+    console.log("USING name")
+    query = { name:body.name }
+  }
+  console.log("query :", query)
 
   const result = await coll.deleteOne(query) 
-  if(result.deletedCount == 1)
+  if(result.deletedCount === 1)
   {
-    res.status(200).send(`Succès !\n${query.name} supprimé`)
+    res.status(200).send(`Succès !\n${query} supprimé`)
   }
   else
   {
@@ -102,14 +108,28 @@ app.get("/pokedex/list", function (req, res) {
 
 app.post("/pokedex/insert", jsonParser, (req, res) => {
   const db = dbo.getDb()
-  const coll = db.collection("pokedex")
+  const collMon = db.collection("pokemon")
+  const collDex = db.collection("pokedex")
   const body = req.body
   console.log('Got body:', body)
+  let document = null
 
-  coll.insertOne(body)
+  console.log("body :", body)
 
-  res.json(body)
-})
+    collMon.find(body).toArray(function (err, result) {
+    if (err)
+    {
+      res.status(400).send("Error fetching pokemons!")
+    }
+    document = result
+    console.log("document :", document)
+    console.log("Au dessus = le log du fin()")
+    collDex.insertOne(document)
+    res.json(document)
+  })
+
+  res.json()
+  })
 
 app.delete("/pokedex/delete", jsonParser, async (req, res) => {
   const db = dbo.getDb()

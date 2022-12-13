@@ -1,7 +1,7 @@
 import './App.css';
 import CatchEmAll from "./pages/CatchEmAll.js"
 import PokeList from "./pages/PokeList.js"
-import PokEdit from "./pages/PokEdit.js"
+import PokEdition from "./pages/PokEdit.js"
 import {
   BrowserRouter as Router,
   Switch,
@@ -21,7 +21,7 @@ function App() {
   //   <Routes>
   //     <Route path='/' element={<CatchEmAll />}/>
   //     <Route path='/pokemons' element={<PokeList />}/>
-  //     <Route path='/pokedit' element={<PokEdit />}/>
+  //     <Route path='/pokedit' element={<PokEdition />}/>
   //   </Routes>
   // </Router>
 
@@ -35,7 +35,7 @@ function App() {
         <PokeList />
       </Route>
       <Route path="/pokedit">
-        <PokEdit />
+        <PokEdition />
       </Route>
     </Switch>
   </Router>

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { useEffect, useState } from 'react'
 import { getAll , getPokedex} from '../api/PokemonUtilities'
 import PokeCard from '../components/PokeCard'
+import NavBar from '../components/Nav'
 
 function CatchEmAll(props)
 {
@@ -27,19 +28,15 @@ function CatchEmAll(props)
     },[])
 
     // Remplissage de la liste de composant à afficher (Entrée du pokedex)
-    let pokeCradList = []
+    let pokeCardList = []
     pokedex.map( async (pokemon, key) => {
-        pokeCradList.push( <PokeCard pokemon = {pokemon}></PokeCard> )
+        pokeCardList.push( <PokeCard pokemon = {pokemon}></PokeCard> )
     })
 
     return <>
-    <h1>Navigation</h1>
-        <ul>
-            <li><Link to="/pokemons">PokeList</Link></li>
-            <li><Link to="/pokedit">PokEdit</Link></li>
-        </ul>
+    <NavBar></NavBar>
     <h2>Votre pokedex</h2>
-    {pokeCradList}
+    {pokeCardList}
     </>
 }
 
