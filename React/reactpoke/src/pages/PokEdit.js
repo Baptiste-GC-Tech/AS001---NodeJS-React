@@ -1,6 +1,7 @@
 import { catchPokemon } from '../api/PokemonUtilities'
 import { useEffect, useState } from 'react'
 import { getAll } from '../api/PokemonUtilities'
+import { useForm } from 'react-hook-form'
 import PokeCard  from '../components/PokeCard'
 import NavBar  from '../components/Nav.js'
  
@@ -24,17 +25,33 @@ function PokEdition(props)
         </>
         )
     })
+
+    const { register, handleSubmit } = useForm()
+
+    const onSubmit = async (data) => {
+        console.log(data)
+        const response = await fetch(
+            'http://localhost:4444/pokemon/insert', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json', 
+                    'Content-Type':'application/json'
+                },
+                body: JSON.stringify({
+                    name: data.name,
+                    img: data.img
+                })
+            }
+        )
+    }
  
     return <>
         <NavBar></NavBar>
-        <h2>Modifier la liste des pokémons dispos</h2>
-        <form>
-            <h3>Ajouter un Pokemon</h3>
-            <label>
-                Nom de votre pokemon :
-                <input type="text" name="name" />
-            </label>
-            <input type="submit" value="Submit" />
+        <h2>Ajoutez des pokemons à la base de donnée</h2>
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <input type="text" {...register("name")} placeholder="nom de votre pokemon" />
+            <input type="text" {...register("img")} placeholder="lien de votre image" />
+            <button type="submit">Ajouter</button>
         </form>
         <div>
             {pokeCardRequired}
