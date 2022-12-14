@@ -38,11 +38,25 @@ app.post("/pokemon/insert", jsonParser, (req, res) => {
   const db = dbo.getDb()
   const coll = db.collection("pokemon")
   const body = req.body
-  console.log('Got body:', body)
 
-  coll.insertOne(body)
+  console.log('Got body from pokemon/insert/:', body)
 
-  res.json(body)
+  coll.find({name: body.name}).toArray(function (err, result) {
+    if (err)
+    {
+      res.status(400).send("Error fetching pokedex!")
+    }
+    console.log("result[0] :", result[0])
+    if (result[0] === undefined)
+    {
+      coll.insertOne(body)
+      res.status(200).json(body)
+    }
+    else
+    {
+      res.status(500).json(body)
+    }
+  })
 })
 
 app.post('/pokemon/update', jsonParser, (req, res) => {
@@ -82,7 +96,7 @@ app.delete("/pokemon/delete", jsonParser, async (req, res) => {
   const result = await coll.deleteOne(query) 
   if(result.deletedCount === 1)
   {
-    res.status(200).send(`Succès !\n${query} supprimé`)
+    res.status(200).send(`Succès !\n${query.name} supprimé`)
   }
   else
   {
@@ -110,29 +124,47 @@ app.post("/pokedex/insert", jsonParser, (req, res) => {
   const db = dbo.getDb()
   const coll = db.collection("pokedex")
   const body = req.body
+
   console.log('Got body of pokedex/insert/ :', body)
 
-  coll.insertOne(body)
-
-  res.json(body)
+  coll.find({name: body.name}).toArray(function (err, result) {
+    if (err)
+    {
+      res.status(400).send("Error fetching pokedex!")
+    }
+    console.log("result[0] :", result[0])
+    if (result[0] === undefined)
+    {
+      coll.insertOne(body)
+      res.status(200).json(body)
+    }
+    else
+    {
+      res.status(500).json(body)
+    }
+  })
 })
 
 app.delete("/pokedex/delete", jsonParser, async (req, res) => {
   const db = dbo.getDb()
   const coll = db.collection("pokedex")
   const body = req.body
+  let query = null
   
-  if(body._id)
+  if(!!body._id)
   {
-    const query = { _id:ObjectId(body._id) }
+    console.log("USING _id")
+    query = { _id:body._id }
   }
-  else if(body.name)
+  else if(!!body.name)
   {
-    const query = { name:body.name }
-  } 
+    console.log("USING name")
+    query = { name:body.name }
+  }
+  console.log("query :", query)
 
-  const result = await coll.deleteOne(query)
-  if(result.deletedCount == 1)
+  const result = await coll.deleteOne(query) 
+  if(result.deletedCount === 1)
   {
     res.status(200).send(`Succès !\n${query.name} supprimé`)
   }
