@@ -12,6 +12,24 @@ export const getAll = async () => {
     return pokemons
 }
 
+export const updatePoke = async () => {
+    const response = await fetch(
+        'http://localhost:4444/pokemon/update', {
+            method: 'UPDATE', 
+            headers: {
+                'Accept': 'application/json', 
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify({
+                name: data.name
+            })
+        }
+    )
+    const pokemons = await response.json()
+    return pokemons
+}
+
+
 export const addOne = async () => {
     const response = await fetch(
         'http://localhost:4444/pokemon/insert', {
