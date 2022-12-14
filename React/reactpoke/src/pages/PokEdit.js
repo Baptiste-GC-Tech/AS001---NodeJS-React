@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import PokeCard  from '../components/PokeCard'
 import NavBar  from '../components/Nav.js'
 import DeleteForm from '../components/DeleteForm'
+import UpdateForm from '../components/UpdateForm'
  
 function PokEdition(props)
 {
@@ -17,11 +18,12 @@ function PokEdition(props)
             .catch(error => console.error("Bruh something went wrong : ", error.message))
     },[])
     
-    let pokeCardRequired = []
+    let formUtilities = []
     pokemons.map((pokemon, key) => {
-        pokeCardRequired.push(
+        formUtilities.push(
         <>
         <PokeCard pokemon = {pokemon}></PokeCard>
+        <UpdateForm pokemon = {pokemon}></UpdateForm>
         <DeleteForm pokemon = {pokemon}></DeleteForm>
         </>
         )
@@ -53,7 +55,7 @@ function PokEdition(props)
             <button type="submit">Ajouter</button>
         </form>
         <div>
-            {pokeCardRequired}
+            {formUtilities}
         </div>
     </>
 }
