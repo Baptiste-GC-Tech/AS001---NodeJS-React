@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { getAll, catchPokemon } from '../api/PokemonUtilities'
 import { useForm } from 'react-hook-form'
-import PokeCard from '../components/PokeCard'
 import NavBar from '../components/Nav'
+import PokeCard from '../components/PokeCard'
+import CaptureForm from '../components/CaptureForm'
 
 import './PokeList.css'
 
@@ -35,18 +36,18 @@ function PokeList(props)
                 })
             }
         )
+        // console.log("ntm la centenaire")
+        // console.log("Got body from PokeList.js :", JSON.stringify({name: data.name, img: data.img}))
     }
+
+    console.log("coucou")
 
     let pokeCardList = []
     pokemons.map((pokemon, key) => {
         pokeCardList.push(
         <>
             <PokeCard pokemon = {pokemon}></PokeCard>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <input type="hidden" {...register("name")} value={pokemon.name} />
-                <input type="hidden" {...register("img")} value={pokemon.img} />
-                <button type="submit">Capturer</button>
-            </form>
+            <CaptureForm onSubmit={handleSubmit(onSubmit)} pokemon={pokemon}></CaptureForm>
         </>)
     })
 
