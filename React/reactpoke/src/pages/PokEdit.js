@@ -5,6 +5,8 @@ import PokeCard  from '../components/PokeCard'
 import NavBar  from '../components/Nav.js'
 import DeleteForm from '../components/DeleteForm'
 import UpdateForm from '../components/UpdateForm'
+
+import './PokEdit.css'
  
 function PokEdition(props)
 {
@@ -22,9 +24,9 @@ function PokEdition(props)
     pokemons.map((pokemon, key) => {
         formUtilities.push(
         <>
-        <PokeCard pokemon = {pokemon}></PokeCard>
-        <UpdateForm pokemon = {pokemon}></UpdateForm>
-        <DeleteForm pokemon = {pokemon}></DeleteForm>
+            <PokeCard pokemon = {pokemon}></PokeCard>
+            <UpdateForm pokemon = {pokemon}></UpdateForm>
+            <DeleteForm pokemon = {pokemon}></DeleteForm>
         </>
         )
     })
@@ -54,7 +56,7 @@ function PokEdition(props)
             <input type="text" {...register("img")} placeholder="lien de votre image" />
             <button type="submit">Ajouter</button>
         </form>
-        <div>
+        <div className="card">
             {formUtilities}
         </div>
     </>

@@ -151,7 +151,7 @@ app.delete("/pokedex/delete", jsonParser, async (req, res) => {
     {
       console.log("Un truc à supprimé")
     }
-    ekse
+    else
     {
       console.log("Pas de truc à supprimé")
     }
