@@ -33,7 +33,7 @@ export default function DeleteForm(props){
     return <>
         <form onSubmit={handleSubmit(onSubmit)}>
             <input type="hidden" {...register("name")} value={props.pokemon.name} />
-            <button type="submit">Killer Queen</button>
+            <button type="submit">Supprimer</button>
         </form>
     </>
 }
