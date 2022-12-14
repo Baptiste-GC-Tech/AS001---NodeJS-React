@@ -2,6 +2,7 @@ import './App.css';
 import CatchEmAll from "./pages/CatchEmAll.js"
 import PokeList from "./pages/PokeList.js"
 import PokEdition from "./pages/PokEdit.js"
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,7 +13,6 @@ import {
 //   BrowserRouter as Router,
 //   Routes,
 //   Route
-
 // } from "react-router-dom"
 
 function App() {

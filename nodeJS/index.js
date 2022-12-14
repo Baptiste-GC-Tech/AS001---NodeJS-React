@@ -110,7 +110,7 @@ app.post("/pokedex/insert", jsonParser, (req, res) => {
   const db = dbo.getDb()
   const coll = db.collection("pokedex")
   const body = req.body
-  console.log('Got body:', body)
+  console.log('Got body of pokedex/insert/ :', body)
 
   coll.insertOne(body)
 
