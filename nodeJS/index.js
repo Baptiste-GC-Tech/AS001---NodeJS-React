@@ -79,19 +79,7 @@ app.delete("/pokemon/delete", jsonParser, async (req, res) => {
   const db = dbo.getDb()
   const coll = db.collection("pokemon")
   const body = req.body
-  let query = null
-  
-  if(!!body._id)
-  {
-    console.log("USING _id")
-    query = { _id:body._id }
-  }
-  else if(!!body.name)
-  {
-    console.log("USING name")
-    query = { name:body.name }
-  }
-  console.log("query :", query)
+  const query = { name: body.name }
 
   const result = await coll.deleteOne(query) 
   if(result.deletedCount === 1)

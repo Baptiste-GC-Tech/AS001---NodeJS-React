@@ -22,7 +22,7 @@ function PokeList(props)
         pokeCardList.push(
         <>
             <PokeCard pokemon = {pokemon}></PokeCard>
-            <CaptureForm pokemon={pokemon}></CaptureForm>
+            <CaptureForm pokemon = {pokemon}></CaptureForm>
         </>)
         console.log("Printing current attempt...")
         console.log(pokemon.name)
