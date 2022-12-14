@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { getAll, catchPokemon } from '../api/PokemonUtilities'
+import { getAll } from '../api/PokemonUtilities'
 import NavBar from '../components/Nav'
 import PokeCard from '../components/PokeCard'
 import CaptureForm from '../components/CaptureForm'

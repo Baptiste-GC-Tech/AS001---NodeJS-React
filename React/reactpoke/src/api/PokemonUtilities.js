@@ -15,14 +15,11 @@ export const getAll = async () => {
 export const updatePoke = async () => {
     const response = await fetch(
         'http://localhost:4444/pokemon/update', {
-            method: 'UPDATE', 
+            method: 'UPDATE',
             headers: {
                 'Accept': 'application/json', 
                 'Content-Type':'application/json'
             },
-            body: JSON.stringify({
-                name: data.name
-            })
         }
     )
     const pokemons = await response.json()

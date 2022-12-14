@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom" 
 import { useEffect, useState } from 'react'
 import { getAll , getPokedex} from '../api/PokemonUtilities'
 import PokeCard from '../components/PokeCard'

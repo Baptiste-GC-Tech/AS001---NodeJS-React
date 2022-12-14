@@ -1,5 +1,4 @@
 import { useForm } from 'react-hook-form'
-import { PokemonUtilities } from '../api/PokemonUtilities'
 
 export default function UpdateForm(props){
     const { register, handleSubmit } = useForm()
