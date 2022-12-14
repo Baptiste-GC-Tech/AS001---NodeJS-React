@@ -79,19 +79,9 @@ app.delete("/pokemon/delete", jsonParser, async (req, res) => {
   const db = dbo.getDb()
   const coll = db.collection("pokemon")
   const body = req.body
-  let query = null
-  
-  if(!!body._id)
-  {
-    console.log("USING _id")
-    query = { _id:body._id }
-  }
-  else if(!!body.name)
-  {
-    console.log("USING name")
-    query = { name:body.name }
-  }
-  console.log("query :", query)
+  const query = { name: body.name }
+
+  console.log("Je te troll heheheha")
 
   const result = await coll.deleteOne(query) 
   if(result.deletedCount === 1)
@@ -149,27 +139,30 @@ app.delete("/pokedex/delete", jsonParser, async (req, res) => {
   const db = dbo.getDb()
   const coll = db.collection("pokedex")
   const body = req.body
-  let query = null
   
-  if(!!body._id)
-  {
-    console.log("USING _id")
-    query = { _id:body._id }
-  }
-  else if(!!body.name)
-  {
-    console.log("USING name")
-    query = { name:body.name }
-  }
-  console.log("query :", query)
+  const query = { name:body.name }
 
-  const result = await coll.deleteOne(query) 
-  if(result.deletedCount === 1)
-  {
-    res.status(200).send(`Succès !\n${query.name} supprimé`)
-  }
-  else
-  {
-    res.status(500).send("Raté... :'-(")
-  }
+  coll.find(query).toArray(function (err, result) {
+    if (err)
+    {
+      res.status(400).send("Error fetching pokedex!")
+    }
+    if (result !== undefined)
+    {
+      console.log("Un truc à supprimé")
+    }
+    else
+    {
+      console.log("Pas de truc à supprimé")
+    }
+  })
+  // const success = await coll.deleteOne(query)
+  // if(success.deletedCount === 1)
+  // {
+  //   res.status(200).send(`Succès !\n${query.name} supprimé`)
+  // }
+  // else
+  // {
+  //   res.status(500).send("Raté... :'-(")
+  // }
 })
