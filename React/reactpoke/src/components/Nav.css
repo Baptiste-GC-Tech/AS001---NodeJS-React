@@ -1,0 +1,25 @@
+ul
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    list-style-type: none;
+}
+
+nav
+{
+    width: 60%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+a
+{
+    font-size: 2rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: whitesmoke
+}
+a:hover
+{
+    color: rgb(95, 195, 246)
+}

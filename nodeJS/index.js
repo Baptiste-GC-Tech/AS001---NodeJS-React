@@ -60,11 +60,12 @@ app.post("/pokemon/insert", jsonParser, (req, res) => {
 })
 
 app.post('/pokemon/update', jsonParser, (req, res) => {
-  const option = { upsert: true };
-  const filter = {name:req.body.target};
+  const option = { upsert: false };
+  const filter = {name:req.body.name};
   const newData = {
     $set:{
       name: req.body.newName,
+      img: req.body.newImg
     }
   }
   console.log('Got body:', newData);
@@ -80,8 +81,6 @@ app.delete("/pokemon/delete", jsonParser, async (req, res) => {
   const coll = db.collection("pokemon")
   const body = req.body
   const query = { name: body.name }
-
-  console.log("Je te troll heheheha")
 
   const result = await coll.deleteOne(query) 
   if(result.deletedCount === 1)
